@@ -5,9 +5,12 @@ def adder(a):
 
 def fun(a, s):
     s= str(s)
-    a= int(a)
-    c= "Hello, "+ s + " your number is " + str(adder(a))
-    return c
+    try:
+        a= int(a)
+        c= "Hello, "+ s + " your number is " + str(adder(a))
+        return c
+    except:
+        st.error("Valor incorrecto", icon="🚨", width= "stretch")
 
 st.write("# Adder")
 st.write("Hola, anota tu nombre y dame un numero entero: ")
