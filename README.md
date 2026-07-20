@@ -9,6 +9,8 @@ Goal: my final destination
 ## Intent
 I'll write the newest intent on the top, so you can trace what i've done and you can check different branches for that particular purpose
 
+- [ ] Add file persistance to (ngrok + docker)_app
+
 - [X] Create a basic streamlit app that takes a number and a string and prints something like "Hello \<name> your result is 2*\<number>"
     * branch: simpleAdder (check docker section in simpleAdder/README.md)
 
