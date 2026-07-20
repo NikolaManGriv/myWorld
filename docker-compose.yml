@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # 1. Streamlit app
+  my-app:
+    build: .
+    command: streamlit run add_app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+
+  # 2. ngrok service
+  my-tunel:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    environment:
+      # Paste your token like "<here>"
+      NGROK_AUTHTOKEN: ""
+    
+    command: http mi-app:8501 
+    depends_on:
+      - my-app
