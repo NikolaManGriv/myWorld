@@ -95,8 +95,6 @@ def test_unnespecific_name():
         bd_tst.change_db()
 
 
-#TODO test de los errores
-
 if __name__ == "__main__":
     test_invalid_name()
     test_name_not_set()
