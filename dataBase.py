@@ -3,15 +3,15 @@ import duckdb as duck
 import errors as e 
 
 class my_db:
-    def __init__(self):
-        self.conn= duck.connect("base1.duckdb")
-        self.conn.execute("CREATE TABLE IF NOT EXISTS pelis AS SELECT * FROM 'bd1.csv'")
+    def __init__(self, bd_name= "base1.duckdb", data= "bd1.csv"):
+        self.conn= duck.connect(bd_name)
+        self.conn.execute(f"CREATE TABLE IF NOT EXISTS pelis AS SELECT * FROM {data}")
         self.query: str = None
         self.search= "SELECT cantidad FROM pelis WHERE titulo ILIKE ?"
         self.change= "UPDATE pelis SET cantidad = cantidad - 1 WHERE titulo ILIKE ? AND cantidad >0"
 
-    def set_query(self, q:str):
-        if not q:
+    def set_query(self, q:str= None):
+        if not q or len(q) == 0:
             raise e.Error_invalid_name()
         self.query= f"%{q.lower()}%"
 
@@ -37,16 +37,17 @@ class my_db:
     def close_db(self):
         self.conn.close()
 
-db= my_db()
-db.set_query("harry potter 1")
-cant= db.search_db ()
-print(cant)
-db.change_db()
-cant= db.search_db ()
-print(cant)
-"""
-db.set_query("harry potter")
-cant2= db.search_db ()
+if __name__ == "__main__":
+    db= my_db()
+    db.set_query("harry potter 1")
+    cant= db.search_db ()
+    print(cant)
+    db.change_db()
+    cant= db.search_db ()
+    print(cant)
+    """
+    db.set_query("harry potter")
+    cant2= db.search_db ()
 
-print(cant2)
-"""
+    print(cant2)
+    """

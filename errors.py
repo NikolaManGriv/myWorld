@@ -1,4 +1,3 @@
-NOT_MOVIE= "unset movie"
 
 class Error_name_not_set(Exception):
     def __init__(self, msg= "unset movie name"):
