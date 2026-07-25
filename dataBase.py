@@ -28,7 +28,7 @@ class my_db:
             raise e.Error_name_not_set()
 
         amount_left, cant = self.search_db()
-        if cant != 1:
+        if cant > 1:
             raise e.Error_movie_unnspecific()
         
         self.conn.execute(self.change, [self.query])
