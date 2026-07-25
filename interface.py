@@ -8,7 +8,7 @@ def find(query:str, data_base: db.my_db):
 
 def write_db(query: str, data_base: db.my_db):
     data_base.set_query(query)
-    data_base.change_db()
+    return data_base.change_db()
 
 @st.cache_resource
 def connect():
@@ -27,18 +27,21 @@ if __name__ == "__main__":
 
     if send_question and len(question) > 0:
         amount, total_films= find(question, movies_base)
-        if total_films == 0:
+        
+        if total_films == 0 or amount== 0:
             st.write("No tengo esa pelicula :loudspeaker:")
-        elif amount == 0:
-            st.write("No tengo de esa pelicula")
 
         else:
             st.write(f"Tengo {amount} de esa pelicula :sunglasses:")
 
     elif send_change and len(question) > 0:
         try:
-            write_db(question, movies_base)
-            st.write("Operacion realizada exitosamente :tada:")
+            cant= write_db(question, movies_base)
+            if cant > 0:
+                st.write("Operacion realizada exitosamente :tada:")
+                print(cant)
+            else:
+                st.write("No tengo más stock de esa pelicula")
         except :
             st.error(":rotating_light: Pelicula poco especifica. Tengo varias con ese nombre ")
         

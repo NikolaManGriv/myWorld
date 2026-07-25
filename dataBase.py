@@ -27,11 +27,12 @@ class my_db:
         if not self.query:
             raise e.Error_name_not_set()
 
-        _, cant = self.search_db()
+        amount_left, cant = self.search_db()
         if cant != 1:
             raise e.Error_movie_unnspecific()
-
+        
         self.conn.execute(self.change, [self.query])
+        return amount_left
         
 
     def close_db(self):
