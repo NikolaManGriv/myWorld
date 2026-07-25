@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # 1. Streamlit app
+  my-app:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data/bd1.csv:/app/bd1.csv:ro
+      - ./data/base1.duckdb:/app/base1.duckdb
+
+  # 2. ngrok service
+  my-tunel:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    environment:
+      # Paste your token like "<here>"
+      NGROK_AUTHTOKEN: ""
+
+    command: http my-app:8501
+    depends_on:
+      - my-app
