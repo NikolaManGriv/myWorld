@@ -7,8 +7,8 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      - ./data/bd1.csv:/app/bd1.csv:ro
-      - ./data/base1.duckdb:/app/base1.duckdb
+      - ./bd1.csv:/app/bd1.csv:ro
+      - db-data:/dbdata
 
   # 2. ngrok service
   my-tunel:
@@ -21,3 +21,6 @@ services:
     command: http my-app:8501
     depends_on:
       - my-app
+
+volumes:
+  db-data:

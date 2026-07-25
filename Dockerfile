@@ -8,6 +8,7 @@ COPY requirements.txt .
 RUN uv pip install --system --no-cache -r requirements.txt
 
 COPY . .
-RUN chmod +x entrypoint.sh
 
-ENTRYPOINT ["./entrypoint.sh"]
+RUN mkdir -p /dbdata && ln -s /dbdata/base1.duckdb /app/base1.duckdb
+
+CMD ["streamlit", "run", "interface.py", "--server.port=8501", "--server.address=0.0.0.0"]
