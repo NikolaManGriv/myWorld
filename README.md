@@ -10,7 +10,7 @@ Goal: my final destination
 I'll write the newest intent on the top, so you can trace what i've done and you can check different branches for that particular purpose
 
 - [X] Add file persistance to (ngrok + docker)_app
-    * branch: readFile (simple readin)
+    * branch: readFile (simple read file)
     * branch: stream_bd (for a compleate and final product)
 
 - [X] Create a basic streamlit app that takes a number and a string and prints something like "Hello \<name> your result is 2*\<number>"
@@ -62,7 +62,7 @@ This will open your browser and you will be able to run queries as you wish. But
     * The csv data file
     * ngrok token
 
-
+0.
 ```bash
 uv sync && python init_db.py 
 ```
@@ -93,4 +93,18 @@ python export_csv.py
 7. To wake up your container:
 ```bash
 docker compose up -d
+```
+8. If you are finished editing the duckdb file, use export_csv.py to create new.csv file if you want to handle duckdb information
+```bash
+python export_csv.py
+```
+9. Let's say you have other.csv and you want to add its information to your database (make sure other.csv has the same collumns than new.csv obtained from 8). In that case you can merge both by simple doing
+```bash
+python merge_csv.py
+```
+This will create a new merged.csv file that only adds what's new from other.py 
+
+Make sure to delete the old bd1.csv, rename merged.csv to bd1.csv and create duckdb file running:
+```bash
+python init_db.py
 ```
