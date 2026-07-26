@@ -64,7 +64,7 @@ This will open your browser and you will be able to run queries as you wish. But
 
 
 ```bash
-uv sync && python init_db.py && streamlit interface.py
+uv sync && python init_db.py 
 ```
 It will create an duckdb file needed for docker to create the container.
 
